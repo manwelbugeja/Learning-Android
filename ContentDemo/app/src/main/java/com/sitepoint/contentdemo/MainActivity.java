@@ -7,6 +7,7 @@ import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
                 null, null, null, null);
         Cursor c = cursorLoader.loadInBackground();
         adapter.swapCursor(c);
+        Log.i("CONTENT_DEMO", getBaseContext().toString());
     }
 
     @Override
