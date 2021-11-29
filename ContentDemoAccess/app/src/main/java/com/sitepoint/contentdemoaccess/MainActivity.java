@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Uri imageProviderURI = null;
     ContentProviderClient imageProviderContentResolver = null;
     Cursor imageProviderCursor = null;
     String PROVIDER_NAME = "sitepoint.contentdemo.images";
@@ -34,13 +33,18 @@ public class MainActivity extends AppCompatActivity {
         Log.i("CONTENT_DEMO_ACCESS", "Hello world");
 
         imageProviderContentResolver = getContentResolver().acquireContentProviderClient(CONTENT_URI);
-        try {
-            imageProviderCursor = imageProviderContentResolver.query(CONTENT_URI, null, null, null, null);
-        } catch (RemoteException e) {
-            Log.i("CONTENT_DEMO_ACCESS", "Cursor exception");
-            e.printStackTrace();
-        }
+//        try {
+//            imageProviderCursor = imageProviderContentResolver.query(CONTENT_URI, null, null, null, null);
+//        } catch (RemoteException e) {
+//            Log.i("CONTENT_DEMO_ACCESS", "Cursor exception");
+//            e.printStackTrace();
+//        }
 
+        CursorLoader cursorLoader = new CursorLoader(getBaseContext(), CONTENT_URI,
+                null, null, null, null);
+        imageProviderCursor = cursorLoader.loadInBackground();
+
+        Log.i("CONTENT_DEMO_ACCESS", "here");
 
         if (imageProviderCursor == null) {
             Log.i("CONTENT_DEMO_ACCESS", "cursor not obtained");
