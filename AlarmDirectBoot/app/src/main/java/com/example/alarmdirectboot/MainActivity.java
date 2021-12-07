@@ -37,52 +37,14 @@ public class MainActivity extends AppCompatActivity {
         String alarmTime = alarmTimeTextView.getText().toString();
         Log.i(TAG, "Got: " + alarmTime);
 
-        createNotificationChannel();
-        sendNotification("Title", 1);
+        int i = Integer.parseInt(alarmTime);
+        Intent intent = new Intent(this, MyBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this.getApplicationContext(), 234324243, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
+                + (i * 1000), pendingIntent);
+        Toast.makeText(this, "Alarm set in " + i + " seconds",Toast.LENGTH_LONG).show();
 
     }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Channel name";
-            String description = "Channel description";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    void sendNotification(String title, int notificationId) {
-
-        // Create an explicit intent for an Activity in your app
-        /* Intent intent = new Intent(ctx, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(ctx, 0, intent, 0); */
-
-
-
-
-
-        PendingIntent snoozePendingIntent =
-                PendingIntent.getBroadcast(this.getApplicationContext(), notificationId, new Intent(), 0);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getApplicationContext(), "CHANNEL_ID")
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle(String.format("%s (id %d)", title, notificationId))
-                .setContentText("Much longer text that cannot fit one line...")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(false);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this.getApplicationContext());
-
-        // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(notificationId, builder.build());
-    }
-
 }
