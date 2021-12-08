@@ -29,6 +29,9 @@ An demo app that can work before a user unlocks the device on versions that supp
 https://stackoverflow.com/questions/24822506/how-to-start-a-service-at-a-specific-time
 https://www.javatpoint.com/android-alarmmanager
 https://github.com/michaelJustin/android-notification/blob/master/app/src/main/java/com/example/notificationtest/MainActivity.java
+https://stackoverflow.com/questions/41197416/alarmmanager-not-working-after-phone-reboot
+https://www.androidauthority.com/how-to-store-data-locally-in-android-app-717190/
+
 
 
 

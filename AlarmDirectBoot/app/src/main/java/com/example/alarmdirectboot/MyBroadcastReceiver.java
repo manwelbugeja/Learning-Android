@@ -7,16 +7,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.widget.Toast;
-import android.media.MediaPlayer;
 import androidx.core.app.NotificationCompat;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
+    String TAG = "AlARM_DIRECT_BOOT";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
+        Log.i(TAG, "Alarm now");
         Toast.makeText(context, "Alarm now", Toast.LENGTH_LONG).show();
 //        showNotification(context);
         MediaPlayer mp= MediaPlayer.create(context, R.raw.alarm);

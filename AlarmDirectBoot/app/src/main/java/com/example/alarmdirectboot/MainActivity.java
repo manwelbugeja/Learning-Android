@@ -11,6 +11,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     String TAG = "AlARM_DIRECT_BOOT";
+    String dataFileName = "alarmTime";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setNewAlarm(View view) {
+    public void setNewAlarmData(View view) {
         TextView alarmTimeTextView = findViewById(R.id.setTime);
         String alarmTime = alarmTimeTextView.getText().toString();
         Log.i(TAG, "Got: " + alarmTime);
+
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("ALARM", alarmTime);
+        editor.apply();
+
+        setAlarm();
+    }
+
+    public void setAlarm() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        String alarmTime = sharedPreferences.getString("ALARM", null);
 
         int i = Integer.parseInt(alarmTime);
         Intent intent = new Intent(this, MyBroadcastReceiver.class);
@@ -47,4 +61,5 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Alarm set in " + i + " seconds",Toast.LENGTH_LONG).show();
 
     }
+
 }
