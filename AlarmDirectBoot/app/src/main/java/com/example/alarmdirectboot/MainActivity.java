@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this.getApplicationContext(), 234324243, intent, 0);
-                this.getApplicationContext(), 234324243, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
         Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
