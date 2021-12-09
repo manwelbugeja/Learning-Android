@@ -36,12 +36,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setNewAlarmData(View view) {
         TextView alarmTimeTextView = findViewById(R.id.setTime);
-        String alarmTime = alarmTimeTextView.getText().toString();
-        Log.i(TAG, "Got: " + alarmTime);
+        String alarmTimeString = alarmTimeTextView.getText().toString();
+        Log.i(TAG, "Got: " + alarmTimeString);
+
+        long alarmTime = System.currentTimeMillis() + (Integer.parseInt(alarmTimeString) * 1000L);
 
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("ALARM", alarmTime);
+        editor.putLong("ALARM", alarmTime);
         editor.apply();
 
         setAlarm();
@@ -49,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void setAlarm() {
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        String alarmTime = sharedPreferences.getString("ALARM", null);
+        long alarmTime = sharedPreferences.getLong("ALARM", -1);
 
-        int i = Integer.parseInt(alarmTime);
         Intent intent = new Intent(this, MyBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this.getApplicationContext(), 234324243, intent, 0);
+                this.getApplicationContext(), 234324243, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-                + (i * 1000), pendingIntent);
-        Toast.makeText(this, "Alarm set in " + i + " seconds",Toast.LENGTH_LONG).show();
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+        Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
+        Toast.makeText(this, "Alarm set in " + (alarmTime - System.currentTimeMillis())/1000 + " seconds",Toast.LENGTH_LONG).show();
 
     }
 
