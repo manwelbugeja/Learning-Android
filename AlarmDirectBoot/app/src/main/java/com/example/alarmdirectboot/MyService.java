@@ -27,7 +27,7 @@ public class MyService extends Service {
 
     void setAlarm() {
         // not working
-        Log.i(TAG, "Setting alarm from preferences file");
+        Log.i(TAG, "Obtaining preferences file");
         SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         long alarmTime = sharedPreferences.getLong("ALARM", -1);
         Log.i(TAG, "Alarm obtained from preferences file");

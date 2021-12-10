@@ -76,7 +76,13 @@ public class MainActivity extends AppCompatActivity {
             if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
                 ////// reset your alarms here
                 Log.i(TAG, "BOOT_COMPLETED received");
+                Log.i(TAG, "Starting service");
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(new Intent(context, MyService.class));
+                } else {
+                    context.startService(new Intent(context, MyService.class));
+                }
 
             }
 
