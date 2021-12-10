@@ -26,7 +26,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     static String TAG = "ALARM_DIRECT_BOOT";
-    static MainActivity mainActivity;
+    String fileName = "alarmsFile";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,28 +43,31 @@ public class MainActivity extends AppCompatActivity {
 
         long alarmTime = System.currentTimeMillis() + (Integer.parseInt(alarmTimeString) * 1000L);
 
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("ALARM", alarmTime);
         editor.apply();
+        Log.i(TAG, "Wrote alarm to preferences file");
 
-        setAlarm();
+        Intent serviceIntent = new Intent(this, MyService.class);
+        Log.i(TAG, "Starting service");
+        startService(serviceIntent);
     }
 
-    public void setAlarm() {
-        Log.i(TAG, "Setting alarm from preferences file");
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        long alarmTime = sharedPreferences.getLong("ALARM", -1);
-
-        Intent intent = new Intent(this, MyBroadcastReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                this.getApplicationContext(), 234324243, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-        Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
-        Toast.makeText(this, "Alarm set in " + (alarmTime - System.currentTimeMillis())/1000 + " seconds",Toast.LENGTH_LONG).show();
-
-    }
+//    public void setAlarm() {
+//        Log.i(TAG, "Setting alarm from preferences file");
+//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(fileName, MODE_PRIVATE);
+//        long alarmTime = sharedPreferences.getLong("ALARM", -1);
+//
+//        Intent intent = new Intent(this, MyBroadcastReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+//                this.getApplicationContext(), 234324243, intent, 0);
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+//        Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
+//        Toast.makeText(this, "Alarm set in " + (alarmTime - System.currentTimeMillis())/1000 + " seconds",Toast.LENGTH_LONG).show();
+//
+//    }
 
     public static class BootCompletedIntentReceiver extends BroadcastReceiver {
         @Override
@@ -72,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
             if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
                 ////// reset your alarms here
                 Log.i(TAG, "BOOT_COMPLETED received");
-                mainActivity.setAlarm();
+
+
             }
 
         }
