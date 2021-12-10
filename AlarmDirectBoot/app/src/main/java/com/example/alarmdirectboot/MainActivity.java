@@ -9,6 +9,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,8 +25,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    String TAG = "AlARM_DIRECT_BOOT";
-    String dataFileName = "alarmTime";
+    static String TAG = "ALARM_DIRECT_BOOT";
+    static MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setAlarm() {
+        Log.i(TAG, "Setting alarm from preferences file");
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         long alarmTime = sharedPreferences.getLong("ALARM", -1);
 
@@ -61,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
         Toast.makeText(this, "Alarm set in " + (alarmTime - System.currentTimeMillis())/1000 + " seconds",Toast.LENGTH_LONG).show();
 
+    }
+
+    public static class BootCompletedIntentReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
+                ////// reset your alarms here
+                Log.i(TAG, "BOOT_COMPLETED received");
+                mainActivity.setAlarm();
+            }
+
+        }
     }
 
 }
