@@ -3,6 +3,7 @@
     package="com.example.alarmdirectboot">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -13,18 +14,36 @@
         android:theme="@style/Theme.AlarmDirectBoot">
         <service
             android:name=".MyService"
+            android:directBootAware="true"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+        </service>
 
         <receiver
             android:name=".MyBroadcastReceiver"
+            android:directBootAware="true"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <receiver
             android:name=".MainActivity$BootCompletedIntentReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".MainActivity$DirectBootReceiver"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

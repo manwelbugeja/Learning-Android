@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("ALARM", alarmTime);
-        editor.apply();
+        editor.commit();
         Log.i(TAG, "Wrote alarm to preferences file");
 
         Intent serviceIntent = new Intent(this, MyService.class);
@@ -54,28 +54,32 @@ public class MainActivity extends AppCompatActivity {
         startService(serviceIntent);
     }
 
-//    public void setAlarm() {
-//        Log.i(TAG, "Setting alarm from preferences file");
-//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(fileName, MODE_PRIVATE);
-//        long alarmTime = sharedPreferences.getLong("ALARM", -1);
+//    public static class BootCompletedIntentReceiver extends BroadcastReceiver {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
 //
-//        Intent intent = new Intent(this, MyBroadcastReceiver.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-//                this.getApplicationContext(), 234324243, intent, 0);
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-//        Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
-//        Toast.makeText(this, "Alarm set in " + (alarmTime - System.currentTimeMillis())/1000 + " seconds",Toast.LENGTH_LONG).show();
+//            if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
+//                ////// reset your alarms here
+//                Log.i(TAG, "BOOT_COMPLETED received");
+//                Log.i(TAG, "Starting service");
 //
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    context.startForegroundService(new Intent(context, MyService.class));
+//                } else {
+//                    context.startService(new Intent(context, MyService.class));
+//                }
+//            }
+//
+//        }
 //    }
 
-    public static class BootCompletedIntentReceiver extends BroadcastReceiver {
+    public static class DirectBootReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
+            if ("android.intent.action.LOCKED_BOOT_COMPLETED".equals(intent.getAction())) {
                 ////// reset your alarms here
-                Log.i(TAG, "BOOT_COMPLETED received");
+                Log.i(TAG, "LOCKED_BOOT_COMPLETED received");
                 Log.i(TAG, "Starting service");
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -83,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     context.startService(new Intent(context, MyService.class));
                 }
-
             }
 
         }

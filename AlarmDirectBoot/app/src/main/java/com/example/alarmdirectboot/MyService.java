@@ -32,6 +32,16 @@ public class MyService extends Service {
         long alarmTime = sharedPreferences.getLong("ALARM", -1);
         Log.i(TAG, "Alarm obtained from preferences file");
 
+        // Remove alarm if time expired
+        if (alarmTime < System.currentTimeMillis()) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("ALARM");
+            editor.apply();
+            Log.i(TAG, "Expired alarm removed");
+            Toast.makeText(this, "Expired alarm removed",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Intent intent = new Intent(this, MyBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this.getApplicationContext(), 234324243, intent, 0);
