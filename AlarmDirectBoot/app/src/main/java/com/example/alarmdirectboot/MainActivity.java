@@ -23,6 +23,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     static String TAG = "ALARM_DIRECT_BOOT";
@@ -43,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         long alarmTime = System.currentTimeMillis() + (Integer.parseInt(alarmTimeString) * 1000L);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
+        Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
+        SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("ALARM", alarmTime);
         editor.commit();
@@ -54,24 +57,6 @@ public class MainActivity extends AppCompatActivity {
         startService(serviceIntent);
     }
 
-//    public static class BootCompletedIntentReceiver extends BroadcastReceiver {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//
-//            if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
-//                ////// reset your alarms here
-//                Log.i(TAG, "BOOT_COMPLETED received");
-//                Log.i(TAG, "Starting service");
-//
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    context.startForegroundService(new Intent(context, MyService.class));
-//                } else {
-//                    context.startService(new Intent(context, MyService.class));
-//                }
-//            }
-//
-//        }
-//    }
 
     public static class DirectBootReceiver extends BroadcastReceiver {
         @Override

@@ -3,6 +3,7 @@ package com.example.alarmdirectboot;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -28,7 +29,8 @@ public class MyService extends Service {
     void setAlarm() {
         // not working
         Log.i(TAG, "Obtaining preferences file");
-        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
+        Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
+        SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
         long alarmTime = sharedPreferences.getLong("ALARM", -1);
         Log.i(TAG, "Alarm obtained from preferences file");
 
