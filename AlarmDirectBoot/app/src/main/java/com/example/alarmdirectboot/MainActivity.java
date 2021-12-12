@@ -45,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
         long alarmTime = System.currentTimeMillis() + (Integer.parseInt(alarmTimeString) * 1000L);
 
-        Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
-        SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
+        //Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
+        //SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("ALARM", alarmTime);
-        editor.commit();
+        editor.apply();
         Log.i(TAG, "Wrote alarm to preferences file");
 
         Intent serviceIntent = new Intent(this, MyService.class);

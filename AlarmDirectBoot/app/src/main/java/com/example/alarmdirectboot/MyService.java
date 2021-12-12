@@ -29,8 +29,9 @@ public class MyService extends Service {
     void setAlarm() {
         // not working
         Log.i(TAG, "Obtaining preferences file");
-        Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
-        SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
+        //Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
+        // SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         long alarmTime = sharedPreferences.getLong("ALARM", -1);
         Log.i(TAG, "Alarm obtained from preferences file");
 
@@ -41,16 +42,19 @@ public class MyService extends Service {
             editor.apply();
             Log.i(TAG, "Expired alarm removed");
             Toast.makeText(this, "Expired alarm removed",Toast.LENGTH_LONG).show();
-            return;
+            stopSelf();
         }
 
-        Intent intent = new Intent(this, MyBroadcastReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                this.getApplicationContext(), 234324243, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-        Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
-        Toast.makeText(this, "Alarm set in " + (alarmTime - System.currentTimeMillis())/1000 + " seconds",Toast.LENGTH_LONG).show();
+        else {
+            Intent intent = new Intent(this, MyBroadcastReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    this.getApplicationContext(), 234324243, intent, 0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
+            Log.i(TAG, "Alarm set for " + (alarmTime - System.currentTimeMillis()) + "ms");
+            Toast.makeText(this, "Alarm set in " + ((alarmTime - System.currentTimeMillis()) / 1000 + 1) + " seconds", Toast.LENGTH_LONG).show();
+            stopSelf();
+        }
 
     }
 

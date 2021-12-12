@@ -20,7 +20,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         // an Intent broadcast.
         Log.i(TAG, "Alarm now");
         Toast.makeText(context, "Alarm now", Toast.LENGTH_LONG).show();
-        MediaPlayer mp= MediaPlayer.create(context, R.raw.alarm);
+        MediaPlayer mp= MediaPlayer.create(context, R.raw.bell_sound);
         mp.start();
 
     }
