@@ -29,9 +29,9 @@ public class MyService extends Service {
     void setAlarm() {
         // not working
         Log.i(TAG, "Obtaining preferences file");
-        //Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
-        // SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
-        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
+        Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
+        SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
+//        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
         long alarmTime = sharedPreferences.getLong("ALARM", -1);
         Log.i(TAG, "Alarm obtained from preferences file");
 
