@@ -1,8 +1,13 @@
 package com.example.scopedstoragedemo;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PackageManagerCompat;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -10,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +27,7 @@ import java.io.OutputStream;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
+    String TAG = "SCOPED_STORAGE_DEMO";
     ImageView ivBackGround;
     Button btnSave;
 
@@ -42,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
                 saveImageToGallery(bitmap);
             }
         });
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "Requesting storage write permission");
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
     }
 
     private void saveImageToGallery(Bitmap bitmap){
@@ -66,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
             }
             else{
-
                 // Save image to gallery
                 String savedImageURL = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Bird", "Image of bird");
 
@@ -75,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "Image saved to internal!!", Toast.LENGTH_SHORT).show();
 //                resetOpTimes();
-
             }
 
         }catch(Exception e){
