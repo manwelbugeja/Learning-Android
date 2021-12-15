@@ -31,7 +31,11 @@ https://www.javatpoint.com/android-alarmmanager
 https://github.com/michaelJustin/android-notification/blob/master/app/src/main/java/com/example/notificationtest/MainActivity.java
 https://stackoverflow.com/questions/41197416/alarmmanager-not-working-after-phone-reboot
 https://www.androidauthority.com/how-to-store-data-locally-in-android-app-717190/
+https://stackoverflow.com/questions/46445265/android-8-0-java-lang-illegalstateexception-not-allowed-to-start-service-inten
 
+## ScopedStorageDemo
+A demo app that shows scoped storage in action on Android Q and later
 
-
+### Sources
+https://github.com/LHM777/Scoped-Storage-Android-11-java-example-Save-bitmap-in-Android-using-MediaStore/blob/main/app/src/main/java/com/example/saveimage2021/MainActivity.java
 
