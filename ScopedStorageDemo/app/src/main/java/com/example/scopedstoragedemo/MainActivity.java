@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q &&
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Log.i(TAG, "Requesting storage write permission");
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }catch(Exception e){
-
+            Log.i(TAG, "Image not saved " + e.toString());
             Toast.makeText(this, "Image not saved \n" + e.toString(), Toast.LENGTH_SHORT).show();
         }
 
