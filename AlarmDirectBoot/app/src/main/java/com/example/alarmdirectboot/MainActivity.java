@@ -25,10 +25,12 @@ import android.widget.Toast;
 
 import java.io.FileInputStream;
 
+
 public class MainActivity extends AppCompatActivity {
 
     static String TAG = "ALARM_DIRECT_BOOT";
     String fileName = "alarmsFile";
+    static Boolean directBootAware = true;
 
 
     @Override
@@ -45,9 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         long alarmTime = System.currentTimeMillis() + (Integer.parseInt(alarmTimeString) * 1000L);
 
-        Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
-        SharedPreferences sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
-//        SharedPreferences sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
+        SharedPreferences sharedPreferences;
+        // todo: look for protected stored prefs with adb shell
+        if (directBootAware) {
+            Context directBootContext = getApplicationContext().createDeviceProtectedStorageContext();
+            sharedPreferences = directBootContext.getSharedPreferences(fileName, MODE_PRIVATE);
+        }
+        else {
+            sharedPreferences = getSharedPreferences(fileName, MODE_PRIVATE);
+        }
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("ALARM", alarmTime);
         editor.apply();
