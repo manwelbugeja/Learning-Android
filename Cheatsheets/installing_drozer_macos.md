@@ -17,3 +17,9 @@ Install it
 pip install drozer-2.4.4-py2-none-any.whl
 ```
 
+## Running drozer
+After pushing the server to the android device, running it and forwarding the port with adb
+```
+pipenv shell
+drozer console connect
+```
