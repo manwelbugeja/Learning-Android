@@ -32,3 +32,9 @@ run app.broadcast.info -a com.example.myapp -i
 run app.broadcast.send --action android.intent.action.ACTION
 ```
 
+## Providers
+Find content providers
+```
+run scanner.provider.finduris com.example.myapp
+```
+
