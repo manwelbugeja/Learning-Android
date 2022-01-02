@@ -38,3 +38,9 @@ Find content providers
 run scanner.provider.finduris com.example.myapp
 ```
 
+## Misc
+Scan for SQL injection vulnerabilities
+```
+run scanner.provider.injection -a com.example.myapp
+```
+
