@@ -6,7 +6,7 @@ unxz frida-server-15.1.14-android-x86.xz
 mv frida-server-15.1.14-android-x86 frida-server
 ```
 
-Push it to Android and run it
+Push it to Android
 ```
 adb root
 adb push frida-server /data/local/tmp
@@ -34,3 +34,21 @@ Test setup
 frida-ps -R
 ```
 
+Output:
+```
+❯ frida-ps -R
+ PID  Name
+----  --------------------------------------------------
+2638   Calendar
+3222   FreeHour
+2710   Gmail
+2072   Google App
+3328   Google Play Music
+3379   Hangouts
+3542   My UM
+3303   Settings
+3000   YouTube
+3112      adbd
+2059      android.process.acore
+2378      android.process.media
+```
