@@ -7,14 +7,13 @@ def on_message(message, data):
 code = """
 Java.perform(function() {
  var Activity = Java.use("com.example.vulnapp.MainActivity");
- Activity.setOutput.implementation = function() {
+ Activity.checkPassword.implementation = function() {
      console.log("[ + ] Function called and return true")
      return true;
  }
 });
 """
 
-print("**********HELLO")
 process = frida.get_usb_device().attach('vulnapp')
 script = process.create_script(code)
 
