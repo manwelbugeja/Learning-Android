@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     static String TAG = "ALARM_DIRECT_BOOT";
     String fileName = "alarmsFile";
-    static Boolean directBootAware = true;
+    static Boolean directBootAware = false;
 
 
     @Override
