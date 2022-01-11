@@ -16,6 +16,7 @@ git clone https://github.com/0xFireball/root_avd
 ```
 
 Install apk to AVD
+This may not work, if so, download the SuperSU app from store or similar
 ```
 adb install root_avd/SuperSU/common/Superuser.apk
 ```
