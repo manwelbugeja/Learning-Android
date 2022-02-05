@@ -39,3 +39,8 @@ A demo app that shows scoped storage in action on Android Q and later
 ### Sources
 https://github.com/LHM777/Scoped-Storage-Android-11-java-example-Save-bitmap-in-Android-using-MediaStore/blob/main/app/src/main/java/com/example/saveimage2021/MainActivity.java
 
+## NoDebuggingApp
+An application that detects if debugging is enabled, if so it quits. This helps protect the data of this app including source code because if an application runs while debuggable an attacker can extract data from the app. 
+
+### Sources
+Makan, Android Security Cookbook pg 196

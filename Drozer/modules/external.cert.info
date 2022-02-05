@@ -1,0 +1,21 @@
+#!/usr/bin/python
+
+from drozer.modules import Module, common
+from drozer import android
+import M2Crypto
+import subprocess
+from OpenSSL import crypto
+class Info(Module, common.Filters, common.PackageManager):
+    name = "Print the Signer certificate for an application"
+    description = "this module allows you to print the signer x509 certificate for a given applicaiton"
+    examples = "run ex.cert.info -p com.android.browser"
+    author = "Keith Makan"
+    date = "11-11-2013"
+    license = "GNU GPL"
+    path = ["ex","cert"]
+    def add_arguments(self, parse):
+        parse.add_argument("-p","--package",default=None,help="The Package Name")
+    def execute(self, arguments):
+        pm = self.packageManager()
+        if (
+        
