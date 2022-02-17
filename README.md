@@ -44,3 +44,10 @@ An application that detects if debugging is enabled, if so it quits. This helps 
 
 ### Sources
 Makan, Android Security Cookbook pg 196
+
+## AccessExternalStorageDemo
+An application that gets all pdfs stored on external storage
+
+### Sources
+https://stackoverflow.com/questions/8971328/getting-all-pdf-files-from-external-storage-on-android
+
