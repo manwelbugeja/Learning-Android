@@ -51,3 +51,7 @@ An application that gets all pdfs stored on external storage
 ### Sources
 https://stackoverflow.com/questions/8971328/getting-all-pdf-files-from-external-storage-on-android
 
+## InsecureLoginApp
+An application showcaseing the dangers of exported activities
+
+
