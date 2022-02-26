@@ -54,4 +54,9 @@ https://stackoverflow.com/questions/8971328/getting-all-pdf-files-from-external-
 ## InsecureLoginApp
 An application showcaseing the dangers of exported activities
 
+## StartExternalActivity
+An application which starts the hidde nactivity from InsecureLoginApp when the phone is conntected to a charger
 
+### Sources
+https://stackoverflow.com/questions/10211609/problems-with-action-power-connected/31091887
+https://stackoverflow.com/questions/5940456/code-to-launch-external-app-explicitly
