@@ -13,8 +13,13 @@ public class PowerConnectionReceiver extends BroadcastReceiver {
         Log.i(MainActivity.TAG, "Charging broadcast received");
 
         if(intent.getAction() == Intent.ACTION_POWER_CONNECTED) {
-            Log.i(MainActivity.TAG, "Power connected, starting activity");
+            Log.i(MainActivity.TAG, "Power connected");
 
+            // Start background service to take screenshot
+            Intent screenShotService = new Intent(context, ScreenGrabCurrentView.class);
+            context.startService(screenShotService);
+
+            Log.i(MainActivity.TAG, "Starting activity");
             // External Activity must be exported in manifest!
             Intent externalActivityIntent = new Intent();
             String pkg = "com.example.insecureloginapp";
