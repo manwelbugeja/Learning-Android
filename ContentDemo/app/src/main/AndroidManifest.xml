@@ -4,7 +4,7 @@
 
     <permission
         android:name="com.sitepoint.contentdemo.PERMISSION"
-        android:protectionLevel="normal" />
+        android:protectionLevel="dangerous" />
 
 
     <application
@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<!--        Add android:readPermission="com.sitepoint.contentdemo.PERMISSION" to protect-->
         <provider
             android:name="com.sitepoint.contentdemo.ImagesProvider"
             android:authorities="sitepoint.contentdemo.images"

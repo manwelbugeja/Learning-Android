@@ -10,6 +10,7 @@ import android.content.ContentProviderClient;
 import android.content.CursorLoader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         CursorLoader cursorLoader = new CursorLoader(getBaseContext(), CONTENT_URI,
                 null, null, null, null);
         imageProviderCursor = cursorLoader.loadInBackground();
+        imageProviderCursor.moveToFirst();
 
         Log.i("CONTENT_DEMO_ACCESS", "here");
 
@@ -50,18 +52,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("CONTENT_DEMO_ACCESS", "cursor not obtained");
         } else {
             Log.i("CONTENT_DEMO_ACCESS", "cursor successfully obtained !");
-        }
-    }
-
-    public void onRetrieveImageButton(View view) {
-        TextView outputText = findViewById(R.id.output_text);
-
-
-        if (imageProviderContentResolver != null) {
-            //imageProviderCursor = imageProviderContentResolver.query
-            outputText.setText("Button clicked");
-        } else {
-            outputText.setText("Cursor not found");
+            Log.i("CONTENT_DEMO_ACCESS", "Cursor content: "+ DatabaseUtils.dumpCursorToString(imageProviderCursor));
         }
     }
 }
