@@ -35,7 +35,15 @@ run app.broadcast.send --action android.intent.action.ACTION
 ## Providers
 Find content providers
 ```
-run scanner.provider.finduris com.example.myapp
+run scanner.provider.finduris -a com.example.myapp
+```
+Query Content 
+```
+run app.provider.query content://com.ecample.myapp.content.provider
+```
+Insert Content to provider
+```
+run app.provider.insert content://com.ecample.myapp.content.provider --string title HackedTitle --string note insertedNote
 ```
 
 ## Misc
