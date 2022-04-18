@@ -53,6 +53,16 @@ An application that gets all pdfs stored on external storage
 #### Sources
 https://stackoverflow.com/questions/8971328/getting-all-pdf-files-from-external-storage-on-android
 
+### WebView Example
+Shows basic webview usage: starting new webview; injecting JavaScript; overriding URL loading. This WebView example only loads URLs containing wikipedia. 
+
+### Redirect WebView
+Shows an application redirecting WebView to a specific URL. Contains 3 URLs,
+- "https://en.wikipedia.org/wiki/Android_(operating_system)" Loads in WebView successfully, as should
+- "https://www.google.com" Loads in web browser since it does not contain wikipedia, as should
+- "https://stackoverflow.blog/2011/01/05/the-wikipedia-of-long-tail-programming-questions/" Loads in WebView, but should not. This happens because the check the WebView Example app does is incorrect. (It checks for URLs containing wikipedia)
+
+
 ## Basic attacks
 
 ### Starting external activity
@@ -90,3 +100,5 @@ An application that declares a normal-level custom permission with the same name
 
 #### Sources
 https://commonsware.com/blog/2014/02/12/vulnerabilities-custom-permissions.html
+
+
