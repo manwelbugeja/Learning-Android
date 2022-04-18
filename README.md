@@ -56,6 +56,9 @@ https://stackoverflow.com/questions/8971328/getting-all-pdf-files-from-external-
 ### WebView Example
 Shows basic webview usage: starting new webview; injecting JavaScript; overriding URL loading. This WebView example only loads URLs containing wikipedia. 
 
+#### Sources
+https://www.geeksforgeeks.org/deep-linking-in-android-with-example/
+
 ### Redirect WebView
 Shows an application redirecting WebView to a specific URL. Contains 3 URLs,
 - "https://en.wikipedia.org/wiki/Android_(operating_system)" Loads in WebView successfully, as should
