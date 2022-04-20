@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String TAG = "DYNAMIC_CODE_LEADING_EXAMPLE";
+    public static String TAG = "REFLECTION_EXAMPLE";
 
     // Reflection Example
     public class MyClass {
