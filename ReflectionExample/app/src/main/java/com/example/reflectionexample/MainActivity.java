@@ -23,21 +23,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int ans = 0;
 
+        int ans = 0;
         MyClass myClass = new MyClass();
         Class cls = myClass.getClass();
         try {
             Method method = cls.getDeclaredMethod("addOne", int.class);
             ans = (int) method.invoke(myClass, 12);
-        } catch (NoSuchMethodException e) {
-            Log.i(TAG, "No such method");
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            Log.i(TAG, "Invocation target exception");
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            Log.i(TAG, "NIllegal Access exception");
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
 

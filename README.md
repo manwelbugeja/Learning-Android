@@ -66,6 +66,14 @@ Shows an application redirecting WebView to a specific URL. Contains 3 URLs,
 - "https://stackoverflow.blog/2011/01/05/the-wikipedia-of-long-tail-programming-questions/" Loads in WebView, but should not. This happens because the check the WebView Example app does is incorrect. (It checks for URLs containing wikipedia)
 
 
+### Reflection
+#### Sources
+### Dynamic Code Loading
+#### Sources
+### Alert Example
+#### Sources
+https://www.geeksforgeeks.org/android-alert-dialog-box-and-how-to-create-it/#:~:text=Android%20Alert%20Dialog%20is%20built,icon%20on%20Alert%20dialog%20box.
+
 ## Basic attacks
 
 ### Starting external activity
