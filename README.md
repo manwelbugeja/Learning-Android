@@ -73,6 +73,7 @@ Shows an application redirecting WebView to a specific URL. Contains 3 URLs,
 ### Alert Example
 #### Sources
 https://www.geeksforgeeks.org/android-alert-dialog-box-and-how-to-create-it/#:~:text=Android%20Alert%20Dialog%20is%20built,icon%20on%20Alert%20dialog%20box.
+https://developer.android.com/training/notify-user/build-notification
 
 ## Basic attacks
 
