@@ -75,6 +75,11 @@ Shows an application redirecting WebView to a specific URL. Contains 3 URLs,
 https://www.geeksforgeeks.org/android-alert-dialog-box-and-how-to-create-it/#:~:text=Android%20Alert%20Dialog%20is%20built,icon%20on%20Alert%20dialog%20box.
 https://developer.android.com/training/notify-user/build-notification
 
+### Alert Message
+#### Sources
+https://developer.android.com/training/notify-user/build-notification
+https://stackoverflow.com/questions/19240194/how-to-create-app-shortcut-on-home-screen-on-android-phones-on-installation
+
 ## Basic attacks
 
 ### Starting external activity

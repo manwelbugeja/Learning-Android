@@ -36,5 +36,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="notificationButton"/>
+    <Button
+        android:id="@+id/deceivingNotif"
+        android:text="Whatsapp Notification Attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="deceivingNotifButton"/>
+    <Button
+        android:id="@+id/createShortcut"
+        android:text="Create Shortcut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="createShortcutButton"/>
 
 </LinearLayout>
