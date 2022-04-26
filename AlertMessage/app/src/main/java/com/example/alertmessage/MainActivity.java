@@ -165,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
     public void createShortcutButton(View view) {
         // Create shortcut on home screen
         Intent shortcutIntent = new Intent();
+//        shortcutIntent.setClassName("com.example.alertmessage", "MyActivity");
+
         shortcutIntent.setClass(getApplicationContext(), MyActivity.class);
         shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -179,4 +181,22 @@ public class MainActivity extends AppCompatActivity {
         getApplicationContext().sendBroadcast(addIntent);
     }
 
+    public void removeShortcutButton(View view) {
+        Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
+//        shortcutIntent.setClassName("com.example.alertmessage", "MyActivity");
+        shortcutIntent.setClass(getApplicationContext(), MyActivity.class);
+
+        shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        shortcutIntent.putExtra("someParameter", "HelloWorld");
+
+        Intent removeIntent = new Intent();
+        removeIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+        removeIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "Shortcut Name");
+        removeIntent.putExtra("duplicate", false);
+
+        removeIntent
+                .setAction("com.android.launcher.action.UNINSTALL_SHORTCUT");
+        getApplicationContext().sendBroadcast(removeIntent);
+    }
 }

@@ -80,6 +80,10 @@ https://developer.android.com/training/notify-user/build-notification
 https://developer.android.com/training/notify-user/build-notification
 https://stackoverflow.com/questions/19240194/how-to-create-app-shortcut-on-home-screen-on-android-phones-on-installation
 
+### Transparent Activity
+#### Sources
+https://blog.mindorks.com/how-to-create-a-transparent-activity-in-android
+
 ## Basic attacks
 
 ### Starting external activity
