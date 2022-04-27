@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.transparentactivity" >
+    package="com.example.transparentactivity">
 
     <application
         android:allowBackup="true"
@@ -8,14 +8,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TransparentActivity" >
+        android:theme="@style/Theme.TransparentActivity">
         <activity
-            android:name=".TransparentActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:taskAffinity="com.vioside.freehour"
+            android:launchMode="singleTask"
+            android:name=".FacebookLogin"
             android:exported="false" />
         <activity
+            android:name=".TransparentActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.vioside.freehour"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

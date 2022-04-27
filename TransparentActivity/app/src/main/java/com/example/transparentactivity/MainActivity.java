@@ -16,16 +16,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    protected void onDestroy() {
-        Intent i = new Intent(this, TransparentActivity.class);
-        startActivity(i);
-
-        super.onDestroy();
-    }
-
     public void startActivity(View view) {
-        Intent i = new Intent(this, TransparentActivity.class);
+        Intent i = new Intent(this, FacebookLogin.class);
         startActivity(i);
     }
 }
